@@ -1,5 +1,0 @@
-import PortalGame from "./PortalGame";
-
-export default function Home() {
-  return <PortalGame />;
-}
