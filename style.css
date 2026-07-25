@@ -1,0 +1,404 @@
+:root {
+  --blue: #35bfff;
+  --red: #ff5132;
+  --white: #edf4f1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #080d0f;
+  color: var(--white);
+  font-family: "Arial Narrow", Arial, sans-serif;
+}
+
+button,
+kbd {
+  font: inherit;
+}
+
+#game,
+#scene,
+#scene canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#scene canvas {
+  display: block;
+  cursor: crosshair;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, transparent 42%, rgba(0, 5, 7, 0.58) 120%),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 3px,
+      rgba(255, 255, 255, 0.025) 4px
+    );
+}
+
+header {
+  position: absolute;
+  top: 25px;
+  left: 29px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-shadow: 0 2px 12px #000;
+}
+
+.logo {
+  padding: 8px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+header strong,
+header small {
+  display: block;
+}
+
+header strong {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+
+header small {
+  margin-top: 4px;
+  color: rgba(237, 244, 241, 0.6);
+  font-size: 8px;
+  letter-spacing: 0.22em;
+}
+
+.online {
+  margin-left: 8px;
+  padding-left: 13px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  color: #91f5b7;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+}
+
+.crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 42px;
+  height: 42px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 1px 3px #000);
+  pointer-events: none;
+}
+
+.crosshair i {
+  position: absolute;
+  display: block;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.crosshair i:nth-child(1),
+.crosshair i:nth-child(2) {
+  top: 20px;
+  width: 10px;
+  height: 2px;
+}
+
+.crosshair i:nth-child(1) {
+  left: 2px;
+}
+
+.crosshair i:nth-child(2) {
+  right: 2px;
+}
+
+.crosshair i:nth-child(3),
+.crosshair i:nth-child(4) {
+  left: 20px;
+  width: 2px;
+  height: 10px;
+}
+
+.crosshair i:nth-child(3) {
+  top: 2px;
+}
+
+.crosshair i:nth-child(4) {
+  bottom: 2px;
+}
+
+.crosshair b {
+  position: absolute;
+  inset: 17px;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
+#notice {
+  position: absolute;
+  top: calc(50% + 49px);
+  left: 50%;
+  padding: 7px 12px;
+  transform: translate(-50%, 8px);
+  opacity: 0;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(4, 12, 15, 0.76);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: 0.18s ease;
+  pointer-events: none;
+}
+
+#notice.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+#notice.error {
+  color: #ffc3b8;
+  border-color: rgba(255, 81, 50, 0.65);
+}
+
+.portal-status {
+  position: absolute;
+  right: 28px;
+  bottom: 31px;
+  display: flex;
+  gap: 9px;
+}
+
+.portal-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 125px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(5, 12, 14, 0.7);
+  color: rgba(238, 245, 242, 0.62);
+}
+
+.portal-chip > span {
+  width: 17px;
+  height: 30px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.portal-chip small,
+.portal-chip strong {
+  display: block;
+}
+
+.portal-chip small {
+  margin-bottom: 2px;
+  font-size: 7px;
+  letter-spacing: 0.13em;
+}
+
+.portal-chip strong {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+.portal-chip.blue.active {
+  color: #bceaff;
+  border-color: var(--blue);
+  box-shadow: inset 3px 0 var(--blue);
+}
+
+.portal-chip.red.active {
+  color: #ffd0c7;
+  border-color: var(--red);
+  box-shadow: inset 3px 0 var(--red);
+}
+
+.portal-chip.active > span {
+  opacity: 1;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.charge {
+  position: absolute;
+  right: 28px;
+  bottom: 88px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.charge > div {
+  width: 63px;
+  height: 3px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+#charge-bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  background: white;
+  box-shadow: 0 0 8px white;
+}
+
+.charge small {
+  font-size: 7px;
+  letter-spacing: 0.18em;
+}
+
+footer {
+  position: absolute;
+  left: 29px;
+  bottom: 31px;
+  display: flex;
+  gap: 14px;
+  color: rgba(238, 245, 242, 0.64);
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+kbd {
+  padding: 4px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(4, 10, 12, 0.65);
+  color: white;
+  font-size: 7px;
+}
+
+#start-screen {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(90deg, rgba(3, 8, 10, 0.93), rgba(3, 8, 10, 0.35)),
+    radial-gradient(circle at 72% 42%, rgba(53, 191, 255, 0.16), transparent 35%);
+  backdrop-filter: blur(4px);
+}
+
+#start-screen.hidden {
+  display: none;
+}
+
+.start-card {
+  width: min(510px, calc(100vw - 42px));
+  padding: 41px 44px 37px;
+  border-left: 3px solid white;
+  background: rgba(7, 14, 17, 0.86);
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: #83dcff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.31em;
+}
+
+.start-card h1 {
+  margin: 0;
+  font-size: clamp(64px, 9vw, 108px);
+  letter-spacing: -0.075em;
+  line-height: 0.7;
+}
+
+#start-message {
+  max-width: 390px;
+  margin: 34px 0 24px;
+  color: rgba(238, 245, 242, 0.72);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#start-message.error {
+  color: #ffc1b5;
+}
+
+#start-button {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  border: 0;
+  background: #edf4f1;
+  color: #11191b;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+}
+
+#start-button:hover {
+  background: #bcecff;
+}
+
+#start-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.start-card > small {
+  display: block;
+  margin-top: 13px;
+  color: rgba(238, 245, 242, 0.4);
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+}
+
+@media (max-width: 760px) {
+  header {
+    top: 17px;
+    left: 17px;
+  }
+
+  .online,
+  footer {
+    display: none;
+  }
+
+  .portal-status {
+    right: auto;
+    left: 16px;
+    bottom: 17px;
+  }
+
+  .portal-chip {
+    min-width: 0;
+    padding: 7px 9px;
+  }
+
+  .portal-chip small {
+    display: none;
+  }
+
+  .charge {
+    right: 17px;
+    bottom: 24px;
+  }
+
+  .start-card {
+    padding: 34px 27px 30px;
+  }
+}
