@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BRU Portal Lab</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main id="game">
+      <div id="scene"></div>
+      <div class="vignette"></div>
+
+      <header>
+        <div class="logo">BRU</div>
+        <div>
+          <strong>BRU PORTAL LAB</strong>
+          <small>TEST CHAMBER 01</small>
+        </div>
+        <span class="online">● ONLINE</span>
+      </header>
+
+      <div id="notice" role="status"></div>
+
+      <div class="crosshair" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><b></b>
+      </div>
+
+      <aside class="portal-status">
+        <div id="blue-status" class="portal-chip blue">
+          <span></span>
+          <div><small>ЛІВА КНОПКА</small><strong>СИНІЙ</strong></div>
+        </div>
+        <div id="red-status" class="portal-chip red">
+          <span></span>
+          <div><small>ПРАВА КНОПКА</small><strong>ЧЕРВОНИЙ</strong></div>
+        </div>
+      </aside>
+
+      <div class="charge">
+        <div><span id="charge-bar"></span></div>
+        <small>CHARGE</small>
+      </div>
+
+      <footer>
+        <span><kbd>WASD</kbd> рух</span>
+        <span><kbd>SPACE</kbd> стрибок</span>
+        <span><kbd>R</kbd> очистити портали</span>
+        <span><kbd>ESC</kbd> пауза</span>
+      </footer>
+
+      <section id="start-screen">
+        <div class="start-card">
+          <p class="eyebrow">BUILDER RESEARCH UNIT</p>
+          <h1>PORTAL<br />LAB</h1>
+          <p id="start-message">
+            Постав два портали на стінах, підлозі або стелі та пройди крізь
+            простір.
+          </p>
+          <button id="start-button">ПОЧАТИ ТЕСТ <b>→</b></button>
+          <small>Натискання захопить курсор миші.</small>
+        </div>
+      </section>
+    </main>
+
+    <!-- Three.js завантажується з інтернету. -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
